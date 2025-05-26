@@ -18,3 +18,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
 
     return rets;
 }
+
+/*
+ * link: https://leetcode.com/problems/two-sum/
+ */
