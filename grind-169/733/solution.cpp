@@ -59,3 +59,36 @@ public:
         return image;
     }
 };
+
+// syntax sugar: tuple packing
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int m = image.size(), n = image[0].size(), origColor = image[sr][sc];
+
+        queue<pair<int, int>> bfsQueue;
+        bfsQueue.push(make_pair(sr,sc));
+
+        while (!bfsQueue.empty()) {
+            auto [_sr, _sc] = bfsQueue.front();
+            bfsQueue.pop();
+
+            // outside of image
+            if (_sr >= m || _sc >= n || _sr < 0 || _sc < 0)
+                continue;
+            if (image[_sr][_sc] != origColor)    // pixel not same
+                continue;
+            if (image[_sr][_sc] == color)    // already filled
+                continue;
+
+            image[_sr][_sc] = color;
+
+            bfsQueue.push(make_pair(_sr + 1, _sc));
+            bfsQueue.push(make_pair(_sr    , _sc + 1));
+            bfsQueue.push(make_pair(_sr - 1, _sc));
+            bfsQueue.push(make_pair(_sr    , _sc - 1));
+        }
+
+        return image;
+    }
+};
